@@ -1,0 +1,43 @@
+@startuml
+class User {
+  +int id
+  +String name
+  +String email
+  +String role
+  +login()
+}
+
+class Ticket {
+  +int id
+  +String title
+  +String category
+  +String priority
+  -String status
+  +assignTechnician(User)
+  +changeStatus(String)
+}
+
+class Comment {
+  +int id
+  +String message
+  +Date createdAt
+}
+
+class History {
+  +int id
+  +String action
+  +Date timestamp
+}
+
+class Article {
+  +int id
+  +String title
+  +String content
+}
+
+User "1" -- "0..*" Ticket : requests
+User "0..1" -- "0..*" Ticket : assigned_to
+User "1" -- "0..*" Article : authors
+Ticket "1" *-- "0..*" Comment : contains
+Ticket "1" *-- "0..*" History : logs
+@enduml
